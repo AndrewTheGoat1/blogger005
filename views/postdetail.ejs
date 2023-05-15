@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Post Detail</title>
+    <script src="/javascripts/jquery-3.6.4.min.js"></script>
+</head>
+<body bgcolor="#a5b4fc">
+    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 text-center">Post Detail</h1>
+    <section class="text-gray-600 body-font overflow-hidden">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="lg:w-4/5 mx-auto flex flex-wrap">
+            <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="<%= post.image %>">
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+              <span class="text-sm title-font text-xl text-orange-500 tracking-widest"><%= post.author.name %></span>
+              <% if(locals.user){%> <% if(favStatus.length > 0) {%>
+                <button onclick="favAction('unfav')" class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                    <svg fill="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                      </svg>
+                    </button>
+                <%}else{%>
+                <button onclick="favAction('fav')" class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                      </svg>
+                    </button>
+                <%}%> <%}%>
+              <h1 class="text-gray-900 text-xl title-font font-medium mb-1"><%= post.title %></h1>
+              <p class="leading-relaxed"><%= post.content %></p><br>
+            <h4 class="text-lg text-rose-950">Created <%= post.created %></h4><br>
+            <h4 class="text-lg text-rose-950">Updated <%= post.updated %></h4><br>
+            <% if (locals.user){%>
+                <%if(reactStatus.length > 0){%>
+                    <button onclick="LikeAction('unlike')" class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                          </svg>
+                          
+                    </button>
+                <%}else{%>
+                    <button onclick="LikeAction('like')" class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                          </svg>
+                          
+                          
+                        </button>
+                    <%}%>
+                    <span class="ml-5">Total Like(s): <%= post.like.length %></span>
+        <%}%>
+        <hr class="mt-6">
+              <div class="flex">
+                <% if(locals.user) {%>
+                    <div class="p-2 w-full">
+                        <div class="relative">
+                          <label for="comment" class="leading-7 text-sm text-gray-600">Comment</label>
+                          <textarea id="comment" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                        </div>
+                        <div class="p-2 w-full">
+                            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" id="btnComment">Give Comment</button>
+                          </div>
+                        <%}else{%>                     
+                <span class="title-font font-medium text-xl text-gray-900">Please login for like and comment</span>
+                <a href="/login" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Login</a>
+                <%}%>
+                <!--<button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                  <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                  </svg>
+                </button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div>
+        <% for (var i = 0; i < comments.length; i++){%>
+            <div style="margin: 15px;">
+                <div class="p-4 w-full">
+        <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+          <div class="flex-grow">
+            <h2 class="text-gray-900 text-lg title-font font-medium mb-3"><%= comments[i].commenter.name %></h2>
+            <p class="leading-relaxed text-base"><%= comments[i].comment %></p>
+          </div>
+        </div>
+                </div>
+            <% if(comments[i].reply){%>
+        <div style="text-align: end;">
+            <div class="p-4 w-full">
+                <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+                  <div class="flex-grow">
+                    <h2 class="text-gray-900 text-lg title-font font-medium mb-3"><%= post.author.name %></h2>
+                    <p class="leading-relaxed text-base"><%= comments[i].reply %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%}%>
+            <hr>
+            </div>
+            <%}%>
+        </div>
+      </section>
+    <!-- <div>
+        <div style="width: 600px ; display: inline-block; ">
+        <img src="<%= post.image %>" alt=""
+        width="400px;"
+        height="300px;"
+            style="margin-left: 50px;"
+        ></div>
+        <div style="width: 600px; display: inline-block;">
+        <h2><%= post.title %></h2>
+    <h4><%= post.author.name %></h4>
+    <% if(locals.user){%> <% if(favStatus.length > 0) {%>
+    <button onclick="favAction('unfav')">UnFav</button>
+    <%}else{%>
+    <button onclick="favAction('fav')">Fav</button>
+    <%}%> <%}%>
+    <h5><%= post.created %></h5>
+    <h5><%= post.updated %></h5>
+    <p><%= post.content %></p>
+    <h5>Total Like(s): <%= post.like.length %></h5>
+    <% if (locals.user){%>
+        <%if(reactStatus.length > 0){%>
+            <button onclick="LikeAction('unlike')">Unlike</button>
+        <%}else{%>
+            <button onclick="LikeAction('like')">Like</button>
+            <%}%>
+<%}%>
+    <hr>
+    <div>
+        <% if (locals.user){%>
+        <div>
+            <h4>Comment Here</h4>
+            <textarea name="comment" id="comment" cols="40" rows="4"></textarea><br>
+            <button style="width: 320px;" id="btnComment">Comment</button>
+        </div>
+        <%}else{%>
+        <div>
+            <h4>Please Login or Register for comment</h4>
+            <a href="/login"><button>Login</button></a>
+        </div>
+        <%}%>
+    </div>
+</div>
+    </div>
+    <div>
+        <% for (var i = 0; i < comments.length; i++){%>
+        <div style="margin: 15px;">
+        <div>
+            <h4><%= comments[i].commenter.name %></h4>
+            <p><%= comments[i].comment %></p>
+        </div>
+        <% if(comments[i].reply){%>
+    <div style="text-align: end;">
+    <h4><%= post.author.name %></h4>
+    <p><%= comments[i].reply %></p>
+    </div>
+    <%}%>
+
+<hr>
+</div>
+    </div>
+    <%}%>
+</body> -->
+<script>
+    $("#btnComment").click(function(){
+        const data = {
+            comment: $("#comment").val(),
+            aid: "<%= post.author._id %>",
+            pid: "<%= post._id %>",
+        };
+        $.ajax("/user/givecomment", {
+            method: "POST",
+            data:data,
+            success: function(result){
+                console.log(result);
+                if (result.status){
+                    location.reload();
+                }else{
+                    alert(" Something was wrong");
+                }
+            },
+        });
+    });
+
+    function LikeAction(action) {
+        $.ajax("/user/givelike", {
+            method: "POST",
+            data: { pid: "<%= post._id %>", action: action},
+            success: function (result){
+                if (result.status) {
+                    location.reload();
+                }else{
+                    alert("Something was wrong");
+                }
+            },
+        });
+    }
+    function favAction(action) {
+        $.ajax("/user/favaction", {
+            method: "POST",
+            data: {aid: "<%= post.author._id%>", action:action},
+            success: function (result) {
+                if (result.status){
+                    location.reload();
+                } else {
+                    alert ("Something was wrong");
+                }
+            },
+        });
+    }
+</script>
+</html>
