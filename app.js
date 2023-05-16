@@ -29,7 +29,7 @@ app.use(
   })
 );
 
-mongoose.connect("mongodb://127.0.0.1/blogger005");
+mongoose.connect("mongodb+srv://Andrew:111111!@blogger005.gabohtp.mongodb.net/?retryWrites=true&w=majority");
 const db = mongoose.connection;
 db.on ("error", console.error.bind("MongodDB connection error at blogger005"));
 
