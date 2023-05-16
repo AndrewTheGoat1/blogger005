@@ -2,13 +2,10 @@ var express = require('express');
 var router = express.Router();
 const Post = require("../models/Post");
 const multer = require("multer");
-const { route } = require('.');
 const upload = multer({dest:"public/images/uploads/"});
 const fs = require("fs");
 const Comment = require("../models/Comment");
 const User = require('../models/User');
-const { isAsyncFunction } = require('util/types');
-const { get } = require('http');
 /* GET users listing. */
 
 const checkUser = function (req, res, next){

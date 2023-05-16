@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var passwordValidator = require('password-validator');
 const User = require("../models/User");
-const { populate } = require('../models/Post');
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 var schema = new passwordValidator();
